@@ -1,0 +1,205 @@
+<!DOCTYPE html> {% load staticfiles %}
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Attendance Gateway</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}" />
+    <link rel="stylesheet" href="{% static 'attendance_files/formoid1/formoid-default-skyblue.css' %}" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+   <link href='https://fonts.googleapis.com/css?family=Dosis:300,400,200' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'>
+    <link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+    <!--scripts section-->
+    
+    <script type="text/javascript" src="{% static 'attendance_files/formoid1/jquery.min.js' %}"></script>
+    <script src="{% static 'js/jquery-1.11.3.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+</head>
+
+<body class="blurBg-false">
+    <!--start nav bar-->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://zaya.in"><img class="img-responsive" src="http://zaya.in/images/wlogo.png" alt="LOGO"></a>
+            </div>
+            <div class="collapse navbar-collapse text-right" id="myNavbar">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#intro_sect">HOME</a></li>
+                    <li><a href="#std_form">ATTENDANCE</a></li>
+                    <li><a href="#new_form">REGISTATION</a></li>
+                    <li><a href="#report_sect">REPORT</a></li>
+                    <li><a href="#footer_sect">CONTACT</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!--end nav bar-->
+    <!--Intro section-->
+    <div class="container-fluid introbody" id="intro_sect">
+        <div class="row text-center" style="margin-bottom: 3%">
+           <div class="page-header">
+            <h1>ATTENDANCE PORTAL</h1>
+            </div>
+        </div>
+        <div class="row introcontent">
+            <img class="img-responsive" src="{% static 'img/intro.jpg'%}" alt="Intro Logo"  style="height: auto; width: 20%">
+            <p><strong>
+				This is the official portal for <br> entering the existing and new details for  enrolled students in our eductional institute.</strong>
+            </p>
+        </div>
+        <div class="row text-center">
+            <a href="#std_form">
+                <span class="glyphicon glyphicon-circle-arrow-down downlogo"></span>
+            </a>
+        </div>
+    </div>
+    <!--end Intro section-->
+
+    <!-- Start Attendance form section-->
+    <div class="container-fluid form-background" id="std_form">
+        <div class="col-md-4">
+            <div class="row">
+                <img class="img-responsive img-circle" src="{%static 'img/raisehand.jpg'%}" style="width: 50%; height: auto">
+            </div>
+           <div class="row">
+            <p class="text-info attendance-info">This form helps to enter the attendance details for registered and enrolled students in our institution.
+                <br> You can easily fill in this form which records the existing students activites in class, for any given day. For new students you need to <strong><i><a href="#new_form">register</a></i></strong> them before giving attendance.
+            </p>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <form class="formoid-default-skyblue" style="background-color:#1A2223;font-size:14px;font-family:'Open Sans','Helvetica Neue','Helvetica',Arial,Verdana,sans-serif;color:#666666;max-width:480px;min-width:150px" method="post">{% csrf_token %}
+                <div class="title">
+                    <h2>Student Attendance Form</h2></div>
+                <div class="element-input" title="Enter students unique Student ID(alphanumeric)">
+                    <label class="title">ID<span class="required">*</span></label>
+                    <input class="medium" type="text" name="studentid" required="required" />
+                </div>
+                <div class="element-date">
+                    <label class="title">Date<span class="required">*</span></label>
+                    <input class="large" data-format="yyyy-mm-dd" type="date" name="date" required="required" placeholder="yyyy-mm-dd" />
+                </div>
+                <div class="element-number" title="Assign point in range 0 to 5 for homework">
+                    <label class="title">Done Homework<span class="required">*</span></label>
+                    <input class="small" type="text" min="0" max="5" name="homework" required="required" value="" />
+                </div>
+                <div class="element-number" title="Deduct point in range 0 to -5 for disturbing in class">
+                    <label class="title">Disrupting Class<span class="required">*</span></label>
+                    <input class="small" type="text" min="-5" max="0" name="disrupt" required="required" value="" />
+                </div>
+                <div class="element-number" title="Assign point in range 0 to 5 for helping in class">
+                    <label class="title">Helping Classmates<span class="required">*</span></label>
+                    <input class="small" type="text" min="0" max="5" name="helping" required="required" value="" />
+                </div>
+                <div class="submit">
+                    <input type="submit" value="Submit " name="attendance_submit" />
+                </div>
+            </form>
+        </div>
+        <script type="text/javascript" src="{% static 'attendance_files/formoid1/formoid-default-skyblue.js' %}"></script>
+    </div>
+    <!-- Stop Attendance form-->
+
+    <!--New Registration section-->
+    <div class="container-fluid newform-background" id="new_form">
+        <div class="col-md-4">
+          <div class="row">
+              <img class="img-responsive" src="{% static 'img/stdshadow.jpg' %}" style="width: 50%; height: auto">
+          </div>
+           <div class="row">
+            <p class="text-muted attendance-info">This form helps to regisrer new students in our institutions attendance mechanism.
+                <br> You can easily register them using this form here after which <strong><i><a href="#std_form">attendance</a></i></strong> can be given to them.
+                <br><code>Always remember to give only alphanumeric new student id else registration will be ignored.</code>
+			</p>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <link rel="stylesheet" href="{% static 'newform_files/formoid1/formoid-solid-dark.css' %}" type="text/css" />
+            <form class="formoid-solid-dark" style="background-color:#1A2223;font-size:14px;font-family:'Roboto',Arial,Helvetica,sans-serif;color:#34495E;max-width:480px;min-width:150px" method="post">{% csrf_token %}
+                <div class="title">
+                    <h2>Register New Student</h2></div>
+                <div class="element-input" title="Enter unique new id must be alphanumeric">
+                    <label class="title"><span class="required">Student ID*</span></label>
+                    <div class="item-cont">
+                        <input class="large" type="text" name="newstudentid" required="required" placeholder="ID" /><span class="icon-place"></span></div>
+                </div>
+                <div class="element-name">
+                    <label class="title"><span class="required">Name*</span></label><span class="nameFirst"><input placeholder="Name First" type="text" size="8" name="name_first" required="required"/><span class="icon-place"></span></span><span class="nameLast"><input placeholder="Name Last" type="text" size="14" name="name_last" required="required"/><span class="icon-place"></span></span>
+                </div>
+                <div class="element-number" title="Age should be within 4 to 20 years">
+                    <label class="title"><span class="required">Age*</span></label>
+                    <div class="item-cont">
+                        <input class="medium" type="text" min="4" max="20" name="age_val" required="required" placeholder="Age field" value="" /><span class="icon-place"></span></div>
+                </div>
+                <div class="element-number" title="Standard  1 to 12  class">
+                    <label class="title"><span class="required">Class*</span></label>
+                    <div class="item-cont">
+                        <input class="medium" type="text" min="1" max="12" name="class_val" required="required" placeholder="Class field" value="" /><span class="icon-place"></span></div>
+                </div>
+                <div class="submit">
+                    <input type="submit" value="Submit"  name="newform_submit"/>
+                </div>
+            </form>
+        </div>
+        <script type="text/javascript" src="{% static 'newform_files/formoid1/formoid-solid-dark.js' %}"></script>
+    </div>
+    <!--End Registration Section-->
+    <!--start Report section -->
+    <div class="container-fluid text-center report-background" id="report_sect">
+        <span><i class="glyphicon glyphicon-stats reportlogo"></i></span>
+        <h4 class="report-heading"><strong>Attendance Summary Report</strong></h4>
+        <p>
+        <em style="font-size: 125%">
+        Here you can check out all enrolled students performance report. <br>This report gives a comprehensive and easy to access overall performance of students over a period of time at a glance.
+        </em>
+        </p>
+        <form method="get">
+            <input type="submit" name="stdreport" value="View Report" class="btn btn-lg">
+        </form>
+    </div>
+    <!--End Report section -->
+    <!--footer section-->
+    <div class="container-fluid jumbotron text-center footer-background" id="footer_sect">
+        <footer>
+            Designed by <b>Kumar Sabaysachi Padhi</b>&shy;
+            <i>Git-hub link</i>&shy; &shy; &mdash;
+            <a href="https://github.com/procoder317" style="color: #fffacd">PROCODER</a> 
+                <br><p>Acknowledgement to Zaya.in</p>
+        </footer>
+    </div>
+    <!--stop footer-->
+    <script>
+        $(document).ready(function() {
+            // Add smooth scrolling to all links in this page link
+            $(".navbar a, footer, a[href='#myPage'], a[href='#std_form'], a[href='#new_form']").on('click', function(event) {
+
+                // Prevent default anchor click behavior
+                event.preventDefault();
+
+                // Store hash
+                var hash = this.hash;
+
+                // Using jQuery's animate() method to add smooth page scroll
+                // The optional number (900) specifies the number of milliseconds it takes to scroll to the specified area
+                $('html, body').animate({
+                    scrollTop: $(hash).offset().top
+                }, 900, function() {
+
+                    // Add hash (#) to URL when done scrolling (default click behavior)
+                    window.location.hash = hash;
+                });
+            });
+        })
+    </script>
+</body>
+
+</html>
